@@ -17,11 +17,19 @@ int mod(int a, int b)
 
 int random_state(){
   int random_bool = rand() % 2;
-  printf("%d ", random_bool);
   if (random_bool){
     return LIVE;
   }
   return DEAD;
+}
+
+void populate_board(int board[][size]){
+  // Randomly populates
+  for (int i =0; i<size; i++){
+    for (int j = 0; j < size; j++){
+      board[i][j] = random_state();
+    }
+  }
 }
 
 int von_neumann_neighborhood(int agent_x, int agent_y, int board[][size]){
@@ -62,13 +70,26 @@ int calculate_next_state(int neighbors_sum, int cell_state){
   return DEAD;
 }
 
-void populate_board(int board[][size]){
-  // Randomly populates
+// It has to use previous values to calculate the next iteration
+// Calculate neighborhoods, stores it in a array, updates the board and deletes de aux array
+// when bMoore is 1, then uses moore neighborhoods
+void iterate_board(int board[][size], int bMoore){
+  int* all_neighborhoods = malloc((size * size) * sizeof(int));
   for (int i =0; i<size; i++){
     for (int j = 0; j < size; j++){
-      board[i][j] = random_state();
+      if (bMoore){
+	all_neighborhoods[i * size + j] = moore_neighborhood(i, j, board);
+      } else {
+	all_neighborhoods[i * size + j] = von_neumann_neighborhood(i, j, board);
+      }
     }
   }
+  for (int i =0; i<size; i++){
+    for (int j = 0; j < size; j++){
+      board[i][j] = calculate_next_state(all_neighborhoods[i * size + j], board[i][j]);
+    }
+  }
+  free(all_neighborhoods);
 }
 
 int main() {
@@ -81,6 +102,5 @@ int main() {
     }
   }
   populate_board(board);
-  moore_neighborhood(15, 15, board);
-  printf("%d \n", von_neumann_neighborhood(19, 19, board));
+  iterate_board(board, 1);
 }
