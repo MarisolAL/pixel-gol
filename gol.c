@@ -6,8 +6,7 @@ const int LIVE = 1;
 const int DEAD = 0;
 
 
-int mod(int a, int b)
-{
+int mod(int a, int b){
   int r = a % b;
   return r < 0 ? r + b : r;
 }
@@ -22,7 +21,7 @@ int random_state(){
 
 void populate_board(int size, int board[][size]){
   // Randomly populates
-  for (int i =0; i<size; i++){
+  for (int i = 0; i < size; i++){
     for (int j = 0; j < size; j++){
       board[i][j] = random_state();
     }
@@ -72,7 +71,7 @@ int calculate_next_state(int neighbors_sum, int cell_state){
 // Calculate neighborhoods, stores it in a array, updates the board and deletes de aux array
 void iterate_board(int size, int board[][size], int bMoore){
   int* all_neighborhoods = malloc((size * size) * sizeof(int));
-  for (int i =0; i<size; i++){
+  for (int i = 0; i < size; i++){
     for (int j = 0; j < size; j++){
       if (bMoore){
 	all_neighborhoods[i * size + j] = moore_neighborhood(size, i, j, board);
@@ -81,7 +80,7 @@ void iterate_board(int size, int board[][size], int bMoore){
       }
     }
   }
-  for (int i =0; i<size; i++){
+  for (int i = 0; i < size; i++){
     for (int j = 0; j < size; j++){
       board[i][j] = calculate_next_state(all_neighborhoods[i * size + j], board[i][j]);
     }
