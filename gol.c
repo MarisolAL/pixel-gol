@@ -48,6 +48,7 @@ int moore_neighborhood(int size, int agent_x, int agent_y, int board[][size]) {
     for (int j = y_min; j < y_max + 1; j++){
       if (! ((i == agent_x) && (j == agent_y))){
 	total_value += board[mod(i, size)][mod(j, size)];
+
       }
     }
   }
@@ -55,7 +56,7 @@ int moore_neighborhood(int size, int agent_x, int agent_y, int board[][size]) {
 }
 
 // TODO Refactor
-int calculate_next_state(int neighbors_sum, int cell_state, int size){
+int calculate_next_state(int neighbors_sum, int cell_state){
   if (cell_state == LIVE){
     if (neighbors_sum == 2 || neighbors_sum == 3){
       return LIVE;
@@ -82,7 +83,7 @@ void iterate_board(int size, int board[][size], int bMoore){
   }
   for (int i =0; i<size; i++){
     for (int j = 0; j < size; j++){
-      board[i][j] = calculate_next_state(size, all_neighborhoods[i * size + j], board[i][j]);
+      board[i][j] = calculate_next_state(all_neighborhoods[i * size + j], board[i][j]);
     }
   }
   free(all_neighborhoods);
