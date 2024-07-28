@@ -60,7 +60,7 @@ int main() {
 
   int x = 0;
   int y = 0;
-  int state_tile = 1;
+  int state_tile_id = 1;
   int spr_id = 0;
   u32 tile_id = 1;
 
@@ -69,34 +69,31 @@ int main() {
   kt_TilesetLoad(2, 2, dead_tile);
   kt_PaletteLoad(0, 16, mi_paleta);
 
-  populate_board(size, &board);
+  populate_board(size, board);
 
   for (int i =0; i<size; i++){
     for (int j = 0; j < size; j++){
-      x = i*8 + 5;
-      y = j*8 + 5;
+      x = i*8 + 15;
+      y = j*8 + 15;
       spr_id = i*size + j;
       if (board[i][j]){
-	state_tile = 1;
+	state_tile_id = 1;
       } else {
-	state_tile = 2;
+	state_tile_id = 2;
       }
-      set_sprite(x, y, state_tile, &spr[spr_id]);
+      set_sprite(x, y, state_tile_id, &spr[spr_id]);
     }
   }
 
 
   kt_LayerInitSprite(0, size*size, spr);
 
-  iterate_board(size, &board, 1);
-  printf("Si jala 3 \n %d %d %d %d \n", board[0][0], board[0][1], board[0][2], board[0][3]);
-
   while (1) {
     srand(time(NULL));
     kt_Poll();
     kt_BackColor(back_color);
 
-    iterate_board(size, &board, 1);
+
 
     for (int i =0; i<size; i++){
       for (int j = 0; j < size; j++){
@@ -104,26 +101,20 @@ int main() {
 	y = j*8 + 5;
 	spr_id = i*size + j;
 	if (board[i][j]){
-	  state_tile = 1;
+	  state_tile_id = 1;
 	} else {
-	  state_tile = 2;
+	  state_tile_id = 2;
 	}
-	set_sprite(x, y, state_tile, &spr[spr_id]);
+	set_sprite(x, y, state_tile_id, &spr[spr_id]);
       }
     }
-    /**
-       if (rand() % 2) {
-       spr[2].chr = KT_SPR_CHR(2, KT_FLIP_NONE, KT_SIZE_8, KT_SIZE_8, 0);
-       } else {
-       spr[2].chr = KT_SPR_CHR(1, KT_FLIP_NONE, KT_SIZE_8, KT_SIZE_8, 0); // Esto funciona
-       }**/
+    iterate_board(size, board, 1);
 
-    kt_PaletteLoad(0, 16, mi_paleta);
+    //kt_PaletteLoad(0, 16, mi_paleta);
 
     kt_Draw();
   }
 
-  //iterate_board(size, board, 1);
-  //printf("Si jala 3 \n %d %d %d %d \n", board[0][0], board[0][1], board[0][2], board[0][3]);
+
   return 0;
 }
