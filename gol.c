@@ -1,3 +1,4 @@
+#include "gol.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -68,7 +69,6 @@ int calculate_next_state(int neighbors_sum, int cell_state, int size){
 
 // It has to use previous values to calculate the next iteration
 // Calculate neighborhoods, stores it in a array, updates the board and deletes de aux array
-// when bMoore is 1, then uses moore neighborhoods
 void iterate_board(int size, int board[][size], int bMoore){
   int* all_neighborhoods = malloc((size * size) * sizeof(int));
   for (int i =0; i<size; i++){
