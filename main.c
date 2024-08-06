@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int size = 20;
+int size = 12;
 
 u8 live_tile[32] = {0xC1, 0x23, 0x45, 0x67,
 		    0x89, 0xAB, 0xCD, 0xEF,
@@ -26,7 +26,7 @@ u8 dead_tile[32] = {0x33, 0x33, 0x33, 0x33,
 		    0x33, 0x33, 0x33, 0x33
 };
 
-u8 mi_paleta[16*4] = {0, 0, 0, 0,
+u8 color_palette_p[16*4] = {0, 0, 0, 0,
 		      206, 243, 68, 0,
 		      50, 36, 77, 0,
 		      243, 237, 204, 0,
@@ -67,14 +67,14 @@ int main() {
 
   kt_TilesetLoad(tile_id, 2, live_tile);
   kt_TilesetLoad(2, 2, dead_tile);
-  kt_PaletteLoad(0, 16, mi_paleta);
+  kt_PaletteLoad(0, 16, color_palette_p);
 
   populate_board(size, board);
 
-  for (int i =0; i<size; i++){
+  for (int i = 0; i < size; i++){
     for (int j = 0; j < size; j++){
-      x = i*8 + 15;
-      y = j*8 + 15;
+      x = i*8 + 2;
+      y = j*8 + 2;
       spr_id = i*size + j;
       if (board[i][j]){
 	state_tile_id = 1;
@@ -93,8 +93,6 @@ int main() {
     kt_Poll();
     kt_BackColor(back_color);
 
-
-
     for (int i =0; i<size; i++){
       for (int j = 0; j < size; j++){
 	x = i*8 + 5;
@@ -110,7 +108,7 @@ int main() {
     }
     iterate_board(size, board, 1);
 
-    //kt_PaletteLoad(0, 16, mi_paleta);
+    //kt_PaletteLoad(0, 16, color_palette_p);
 
     kt_Draw();
   }
