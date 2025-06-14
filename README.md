@@ -12,3 +12,48 @@ Conway's Game of Life follows four simple rules:
 2. Any live cell with two or three live neighbors lives on to the next generation.
 3. Any live cell with more than three live neighbors dies by overpopulation.
 4. Any dead cell with exactly three live neighbors becomes a live cell by reproduction.
+
+## Compilation and Execution
+
+This project is written in C and must be compiled before running. The program is split into two parts:
+
+* `gol.c` : the Game of Life logic.
+
+* `main.c` : the entry point, which uses the 2D graphics library to visualize the simulation.
+
+### Requirements
+
+* A C compiler (e.g. `gcc`)
+
+* Katsu library requirements
+
+
+### Steps to execute and compile
+
+1. Compile the Game of Life logic
+
+```bash
+gcc -Wall -c gol.c
+```
+This creates `gol.o`, which contains the compiled logic for the Game of Life.
+
+2. Compile and link the full program
+
+Once `gol.o` is ready, compile the full program using
+
+```bash
+gcc main.c -o gol_simulation \
+  -I./include \
+  -I/usr/include/pipewire-0.3 \
+  -I/usr/include/spa-0.2 \
+  -D_REENTRANT \
+  -L./lib \
+  -lGL -lpipewire-0.3 -lX11 -lm -ldl -lkatsu \
+  gol.o
+```
+
+3. After compiling run the simulation with:
+
+```bash
+./gol_simulation
+```
