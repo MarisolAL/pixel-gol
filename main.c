@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int size = 12;
+int size = 25;
 
 u8 live_tile[32] = {0x20, 0x02, 0x20, 0x02,
 		    0x32, 0x22, 0x42, 0x44,
@@ -48,9 +48,9 @@ void set_sprite(u32 x, u32 y, u32 tile_id, KTSpr *data) {
   data->chr = KT_SPR_CHR(tile_id, KT_FLIP_NONE, KT_SIZE_8, KT_SIZE_8, 0);
 }
 
-KTSpr spr[400] = {0}; // WIP fix to use size
-
 int main() {
+  KTSpr spr[625] = {0}; // WIP fix to use size
+
   srand(time(NULL));
   int board[size][size];
 
