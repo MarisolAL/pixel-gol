@@ -1,8 +1,15 @@
 # Pixeled Game of Life
 
-This project is an implementation of John Conway's Game of Life using Katsu 2D video game library. The Game of Life is a cellular automaton where cells on a grid can live, die, or multiply based on specific rules. This implementation visualizes the cells by plotting live and dead pixels on the screen.
+> ⚠️ Disclaimer: Due to Katsu still being in development with ongoing changes to its API, this project will be paused until the first official release of Katsu is published. Stability and compatibility will be revisited once the library reaches a more stable version.
 
-This project uses [Katsu](https://github.com/fadedled/Katsu) library for rendering graphics. Katsu is a simple and lightweight 2D videogame library designed to provide an easy way to create 2D graphical videogames. Special thanks to the developers of Katsu for providing this tool.
+
+This project is an implementation of John Conway's Game of Life using Katsu 2D video game library. The
+Game of Life is a cellular automaton where cells on a grid can live, die, or multiply based on specific
+rules. This implementation visualizes the cells by plotting live and dead pixels on the screen.
+
+This project uses [Katsu](https://github.com/fadedled/Katsu) library for rendering graphics. Katsu is
+a simple and lightweight 2D videogame library designed to provide an easy way to create 2D graphical
+videogames. Special thanks to the developers of Katsu for providing this tool.
 
 ## Rules of the Game
 
