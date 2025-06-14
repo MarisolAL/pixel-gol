@@ -20,6 +20,10 @@ Conway's Game of Life follows four simple rules:
 3. Any live cell with more than three live neighbors dies by overpopulation.
 4. Any dead cell with exactly three live neighbors becomes a live cell by reproduction.
 
+<p align="center">
+  <img src="img/gol_exec.png" alt="Game of Life Execution" width="450"/>
+</p>
+
 ## Compilation and Execution
 
 This project is written in C and must be compiled before running. The program is split into two parts:
